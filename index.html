@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MultiTool</title>
+
+  <!-- Manifest PWA -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Ícone -->
+  <link rel="icon" href="icons/icon-192.png">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>MultiTool</h1>
+  </header>
+
+  <nav id="menu" class="tools-grid"></nav>
+
+  <main id="conteudo"></main>
+
+  <!-- Botão de instalar PWA -->
+  <button id="installBtn">Instalar App</button>
+
+  <script src="app.js"></script>
+
+  <script>
+    // -----------------------------
+    // REGISTRO DO SERVICE WORKER
+    // -----------------------------
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(() => console.log('Service Worker registrado.'))
+          .catch(err => console.log('Erro SW:', err));
+      });
+    }
+
+    // -----------------------------
+    // LÓGICA DE INSTALAÇÃO PWA
+    // -----------------------------
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') console.log('PWA instalado');
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
+
+    window.addEventListener('appinstalled', () => {
+      console.log('Aplicativo instalado!');
+      installBtn.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
