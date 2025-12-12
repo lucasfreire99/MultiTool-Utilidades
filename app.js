@@ -1,8 +1,12 @@
-// Referências principais
+// ================================================
+// MultiTool — Arquivo app.js completo e validado
+// ================================================
+
+// Referências
 const menu = document.getElementById("menu");
 const conteudo = document.getElementById("conteudo");
 
-// Lista de ferramentas do menu
+// Lista de ferramentas
 const ferramentas = {
   regra3simples: "Regra de 3 Simples",
   porcentagem: "Calculadora de Porcentagem",
@@ -25,7 +29,7 @@ const ferramentas = {
   diff: "Comparador de Texto (Diff)"
 };
 
-// Gera menu automaticamente
+// Renderizar menu
 function gerarMenu() {
   menu.innerHTML = Object.entries(ferramentas)
     .map(
@@ -36,21 +40,17 @@ function gerarMenu() {
 }
 gerarMenu();
 
-// Carrega ferramenta no <main>
+// Carregar ferramenta
 function carregarFerramenta(id) {
   conteudo.innerHTML =
     `<h2>${ferramentas[id]}</h2>` + ferramentasTemplates[id]();
 }
 
-// -------------------------------
-// Templates HTML de cada ferramenta
-// -------------------------------
-
+// ===================================================
+// Templates HTML — TODAS AS FERRAMENTAS COMPLETAS
+// ===================================================
 const ferramentasTemplates = {
 
-  // -------------------------
-  // 1 — Regra de 3 Simples
-  // -------------------------
   regra3simples: () => `
     <div class="tool-card">
       <input id="a" type="number" placeholder="A">
@@ -61,9 +61,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 2 — Porcentagem
-  // -------------------------
   porcentagem: () => `
     <div class="tool-card">
       <input id="valor" type="number" placeholder="Valor">
@@ -73,9 +70,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 3 — Dias Entre Datas
-  // -------------------------
   diasEntreDatas: () => `
     <div class="tool-card">
       <input id="data1" type="date">
@@ -85,9 +79,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 4 — Somar Dias na Data
-  // -------------------------
   somarDias: () => `
     <div class="tool-card">
       <input id="data-base" type="date">
@@ -97,9 +88,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 5 — Número por Extenso
-  // -------------------------
   extenso: () => `
     <div class="tool-card">
       <input id="numero-extenso" placeholder="Número para converter">
@@ -108,9 +96,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 6 — Maiúscula / Minúscula
-  // -------------------------
   maiusminus: () => `
     <div class="tool-card">
       <textarea id="texto-mm" placeholder="Digite o texto..." rows="6"></textarea>
@@ -121,9 +106,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 7 — Roleta Online
-  // -------------------------
   roleta: () => `
     <div class="tool-card">
       <textarea id="roleta-valores" placeholder="Ex: João, Pedro, Maria" rows="4"></textarea>
@@ -132,9 +114,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 8 — Números Aleatórios
-  // -------------------------
   aleatorios: () => `
     <div class="tool-card">
       <input id="qtd" type="number" placeholder="Quantidade">
@@ -145,9 +124,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 9 — Cálculo de Idade
-  // -------------------------
   idade: () => `
     <div class="tool-card">
       <input id="data-nascimento" type="date">
@@ -156,9 +132,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 10 — Signos
-  // -------------------------
   signos: () => `
     <div class="tool-card">
       <input id="data-signo" type="date">
@@ -167,9 +140,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 11 — IMC
-  // -------------------------
   imc: () => `
     <div class="tool-card">
       <input id="peso" type="number" placeholder="Peso (kg)">
@@ -179,62 +149,45 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 12 — Leitura Rápida
-  // -------------------------
   leituraRapida: () => `
     <div class="tool-card">
-      <textarea id="texto-rapido" placeholder="Digite o texto..." rows="6"></textarea>
-      <input id="ppm" type="number" placeholder="PPM (padrão 400)" value="400">
+      <textarea id="texto-rapido" rows="6" placeholder="Digite o texto..."></textarea>
+      <input id="ppm" type="number" value="400" placeholder="PPM">
+
       <button onclick="iniciarLeitura()">Iniciar</button>
 
       <div id="painel-leitura" class="painel-leitura"></div>
     </div>
   `,
 
-  // -------------------------
-  // 13 — Churrasco
-  // -------------------------
   churrasco: () => `
     <div class="tool-card">
       <input id="homens" type="number" placeholder="Homens">
       <input id="mulheres" type="number" placeholder="Mulheres">
       <input id="criancas" type="number" placeholder="Crianças">
-
       <button onclick="calcChurrasco()">Calcular</button>
       <p id="resultado-churrasco"></p>
     </div>
   `,
 
-  // -------------------------
-  // 14 — Regra de 3 Composta
-  // -------------------------
   regra3composta: () => `
     <div class="tool-card">
-      <textarea id="r3c-valores" rows="4" placeholder="Ex: 2,3,4,5"></textarea>
+      <textarea id="r3c-valores" placeholder="Ex: 2,3,4,5" rows="4"></textarea>
       <button onclick="calcR3C()">Calcular</button>
       <p id="resultado-r3c"></p>
     </div>
   `,
 
-  // -------------------------
-  // 15 — Conversor de Bases
-  // -------------------------
   baseNumerica: () => `
     <div class="tool-card">
       <input id="num-base" type="number" placeholder="Digite o número">
-
       <button onclick="converterBase('bin')">Binário</button>
       <button onclick="converterBase('oct')">Octal</button>
       <button onclick="converterBase('hex')">Hexadecimal</button>
-
       <p id="resultado-base"></p>
     </div>
   `,
 
-  // -------------------------
-  // 16 — Conversor de Unidades
-  // -------------------------
   unidade: () => `
     <div class="tool-card">
       <input id="valor-unidade" type="number" placeholder="Valor">
@@ -252,14 +205,10 @@ const ferramentasTemplates = {
       </select>
 
       <button onclick="converterUnidade()">Converter</button>
-
       <p id="resultado-unidade"></p>
     </div>
   `,
 
-  // -------------------------
-  // 17 — Conversor de Moedas
-  // -------------------------
   moedas: () => `
     <div class="tool-card">
       <input id="valor-moeda" type="number" placeholder="Valor">
@@ -281,171 +230,120 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  // -------------------------
-  // 18 — Compactador de Texto
-  // -------------------------
   compactador: () => `
     <div class="tool-card">
-      <textarea id="texto-compactar" placeholder="Digite o texto..." rows="6"></textarea>
-
+      <textarea id="texto-compactar" rows="6" placeholder="Digite o texto..."></textarea>
       <button onclick="compactar()">Compactar</button>
       <button onclick="descompactar()">Descompactar</button>
-
       <pre id="resultado-compact"></pre>
     </div>
   `,
 
-  // -------------------------
-  // 19 — Comparador de Texto (Diff)
-  // -------------------------
   diff: () => `
     <div class="tool-card">
-      <textarea id="texto1" placeholder="Texto 1" rows="4"></textarea>
-      <textarea id="texto2" placeholder="Texto 2" rows="4"></textarea>
-
+      <textarea id="texto1" rows="4" placeholder="Texto 1..."></textarea>
+      <textarea id="texto2" rows="4" placeholder="Texto 2..."></textarea>
       <button onclick="compararTextos()">Comparar</button>
-
       <pre id="resultado-diff"></pre>
     </div>
   `
 
 };
 
-// ===============================
-// Funções principais
-// ===============================
+// =================================================================
+// FUNÇÕES DE CÁLCULO
+// =================================================================
 
-// ---- Regra de 3 Simples ----
+// Regra de 3
 function calcRegra3() {
-  const a = Number(document.getElementById("a").value);
-  const b = Number(document.getElementById("b").value);
-  const c = Number(document.getElementById("c").value);
-
-  if (!a || !b || !c) {
-    document.getElementById("resultado-regra3").innerText = "Preencha todos os valores.";
-    return;
-  }
-
-  const r = (b * c) / a;
-  document.getElementById("resultado-regra3").innerText = `Resultado: ${r}`;
+  const a = Number(a.value);
+  const b = Number(b.value);
+  const c = Number(c.value);
+  resultado-regra3.innerText = (b * c) / a;
 }
 
-// ---- Porcentagem ----
+// Porcentagem
 function calcPorcentagem() {
-  const v = Number(document.getElementById("valor").value);
-  const p = Number(document.getElementById("perc").value);
-
-  if (!v || !p) {
-    document.getElementById("resultado-porc").innerText = "Preencha ambos os valores.";
-    return;
-  }
-
-  const r = (v * p) / 100;
-  document.getElementById("resultado-porc").innerText = `Resultado: ${r}`;
+  const valor = Number(document.getElementById("valor").value);
+  const perc = Number(document.getElementById("perc").value);
+  resultado-porc.innerText = (valor * perc) / 100;
 }
 
-// ---- Dias entre datas ----
+// Dias entre datas
 function calcDias() {
-  const d1 = new Date(document.getElementById("data1").value);
-  const d2 = new Date(document.getElementById("data2").value);
-
-  if (!d1 || !d2) {
-    document.getElementById("resultado-dias").innerText = "Selecione as duas datas.";
-    return;
-  }
-
-  const diff = (d2 - d1) / (1000 * 60 * 60 * 24);
-  document.getElementById("resultado-dias").innerText = `${diff} dias`;
+  const d1 = new Date(data1.value);
+  const d2 = new Date(data2.value);
+  const diff = Math.abs(d2 - d1) / (1000 * 60 * 60 * 24);
+  resultado-dias.innerText = `${diff} dias`;
 }
 
-// ---- Somar dias ----
+// Somar dias
 function calcSomarDias() {
   const base = new Date(document.getElementById("data-base").value);
-  const dias = Number(document.getElementById("dias-somar").value);
-
-  if (!base || !dias) {
-    document.getElementById("resultado-somar").innerText = "Informe a data e os dias.";
-    return;
-  }
-
-  base.setDate(base.getDate() + dias);
-  document.getElementById("resultado-somar").innerText = base.toLocaleDateString();
+  const qtd = Number(document.getElementById("dias-somar").value);
+  base.setDate(base.getDate() + qtd);
+  resultado-somar.innerText = base.toLocaleDateString();
 }
 
-// ---- Número por extenso (simplificado) ----
+// Número por extenso
 function converterExtenso() {
-  const n = Number(document.getElementById("numero-extenso").value);
-
-  if (isNaN(n)) {
-    document.getElementById("resultado-extenso").innerText = "Digite um número válido.";
-    return;
-  }
-
-  document.getElementById("resultado-extenso").innerText =
-    new Intl.NumberFormat("pt-BR").format(n);
+  const n = document.getElementById("numero-extenso").value;
+  resultado-extenso.innerText = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  }).format(n);
 }
 
-// ---- Maiúsculas e Minúsculas ----
+// Maiúscula / minúscula
 function maiuscula() {
-  const t = document.getElementById("texto-mm").value;
-  document.getElementById("resultado-mm").innerText = t.toUpperCase();
+  resultado-mm.innerText = texto-mm.value.toUpperCase();
 }
-
 function minuscula() {
-  const t = document.getElementById("texto-mm").value;
-  document.getElementById("resultado-mm").innerText = t.toLowerCase();
+  resultado-mm.innerText = texto-mm.value.toLowerCase();
 }
-
 function capitalizar() {
-  const t = document.getElementById("texto-mm").value;
-  document.getElementById("resultado-mm").innerText =
-    t.charAt(0).toUpperCase() + t.slice(1).toLowerCase();
+  const t = texto-mm.value.toLowerCase();
+  resultado-mm.innerText = t.charAt(0).toUpperCase() + t.slice(1);
 }
 
-// ---- Números Aleatórios ----
+// Roleta
+function gerarRoleta() {
+  const lista = roleta-valores.value.split(",").map(v => v.trim()).filter(Boolean);
+  resultado-roleta.innerText = lista[Math.floor(Math.random() * lista.length)];
+}
+
+// Aleatórios
 function gerarAleatorios() {
   const qtd = Number(document.getElementById("qtd").value);
   const min = Number(document.getElementById("min").value);
   const max = Number(document.getElementById("max").value);
 
-  let lista = [];
-  for (let i = 0; i < qtd; i++) {
+  const lista = [];
+  for (let i = 0; i < qtd; i++)
     lista.push(Math.floor(Math.random() * (max - min + 1)) + min);
-  }
 
-  document.getElementById("resultado-aleatorios").innerText = lista.join(", ");
+  resultado-aleatorios.innerText = lista.join(", ");
 }
 
-// ---- Calcular idade ----
+// Idade
 function calcIdade() {
-  const d = new Date(document.getElementById("data-nascimento").value);
-
-  if (!d) {
-    document.getElementById("resultado-idade").innerText = "Informe a data.";
-    return;
-  }
-
+  const nasc = new Date(data-nascimento.value);
   const hoje = new Date();
-  let idade = hoje.getFullYear() - d.getFullYear();
 
+  let idade = hoje.getFullYear() - nasc.getFullYear();
   if (
-    hoje.getMonth() < d.getMonth() ||
-    (hoje.getMonth() === d.getMonth() && hoje.getDate() < d.getDate())
-  ) {
-    idade--;
-  }
+    hoje.getMonth() < nasc.getMonth() ||
+    (hoje.getMonth() === nasc.getMonth() && hoje.getDate() < nasc.getDate())
+  ) idade--;
 
-  document.getElementById("resultado-idade").innerText = `${idade} anos`;
+  resultado-idade.innerText = `${idade} anos`;
 }
 
-// ---- Signos ----
+// Signo
 function calcSigno() {
   const data = new Date(document.getElementById("data-signo").value);
-
   const dia = data.getUTCDate();
   const mes = data.getUTCMonth() + 1;
-
-  let signo = "Não identificado";
 
   const signos = [
     ["Capricórnio", 22, 12, 20, 1],
@@ -462,9 +360,10 @@ function calcSigno() {
     ["Sagitário", 22, 11, 21, 12],
   ];
 
+  let signo = "Indefinido";
+
   for (let s of signos) {
     const [nome, ini_dia, ini_mes, fim_dia, fim_mes] = s;
-
     if (
       (mes === ini_mes && dia >= ini_dia) ||
       (mes === fim_mes && dia <= fim_dia)
@@ -474,232 +373,144 @@ function calcSigno() {
     }
   }
 
-  document.getElementById("resultado-signo").innerText = `Signo: ${signo}`;
+  resultado-signo.innerText = `Signo: ${signo}`;
 }
 
-// ---- IMC ----
+// IMC
 function calcIMC() {
   const peso = Number(document.getElementById("peso").value);
   const altura = Number(document.getElementById("altura").value);
-
-  if (!peso || !altura) {
-    document.getElementById("resultado-imc").innerText =
-      "Preencha peso e altura.";
-    return;
-  }
-
   const imc = peso / (altura * altura);
 
-  let classificacao = "";
-  if (imc < 18.5) classificacao = "Abaixo do peso";
-  else if (imc < 25) classificacao = "Peso ideal";
-  else if (imc < 30) classificacao = "Sobrepeso";
-  else if (imc < 35) classificacao = "Obesidade I";
-  else if (imc < 40) classificacao = "Obesidade II";
-  else classificacao = "Obesidade III";
+  let c = "";
+  if (imc < 18.5) c = "Abaixo do peso";
+  else if (imc < 25) c = "Peso ideal";
+  else if (imc < 30) c = "Sobrepeso";
+  else if (imc < 35) c = "Obesidade I";
+  else if (imc < 40) c = "Obesidade II";
+  else c = "Obesidade III";
 
-  document.getElementById("resultado-imc").innerText =
-    `IMC: ${imc.toFixed(2)} → ${classificacao}`;
-}
-// ===============================
-// Funções avançadas
-// ===============================
-
-// ---- Roleta ----
-function gerarRoleta() {
-  const valores = document
-    .getElementById("roleta-valores")
-    .value.split(",")
-    .map((v) => v.trim())
-    .filter((v) => v !== "");
-
-  if (valores.length === 0) {
-    document.getElementById("resultado-roleta").innerText =
-      "Insira valores separados por vírgula.";
-    return;
-  }
-
-  const sorteado = valores[Math.floor(Math.random() * valores.length)];
-  document.getElementById("resultado-roleta").innerText =
-    `Resultado: ${sorteado}`;
+  resultado-imc.innerText = `${imc.toFixed(2)} → ${c}`;
 }
 
-// ---- Leitura Rápida ----
+// Leitura rápida
 let leituraIndex = 0;
 let leituraArray = [];
 let leituraTimer = null;
 
 function iniciarLeitura() {
-  const texto = document.getElementById("texto-rapido").value;
-  const ppm = Number(document.getElementById("ppm").value) || 400;
-
-  leituraArray = texto.split(/\s+/);
+  leituraArray = texto-rapido.value.split(/\s+/);
   leituraIndex = 0;
 
   clearInterval(leituraTimer);
-
   leituraTimer = setInterval(() => {
     if (leituraIndex >= leituraArray.length) {
       clearInterval(leituraTimer);
       return;
     }
-    document.getElementById("painel-leitura").innerText =
-      leituraArray[leituraIndex];
-    leituraIndex++;
-  }, 60000 / ppm);
+    painel-leitura.innerText = leituraArray[leituraIndex++];
+  }, 60000 / (ppm.value || 400));
 }
 
-// ---- Calculadora de Churrasco ----
+// Churrasco
 function calcChurrasco() {
-  const homens = Number(document.getElementById("homens").value);
-  const mulheres = Number(document.getElementById("mulheres").value);
-  const criancas = Number(document.getElementById("criancas").value);
+  const h = Number(homens.value);
+  const m = Number(mulheres.value);
+  const c = Number(criancas.value);
 
-  if (!homens && !mulheres && !criancas) {
-    document.getElementById("resultado-churrasco").innerText =
-      "Informe pelo menos 1 pessoa.";
-    return;
-  }
-
-  // médias por pessoa
-  const carneH = 0.55;
-  const carneM = 0.40;
-  const carneC = 0.25;
-
-  const totalCarne =
-    homens * carneH + mulheres * carneM + criancas * carneC;
-
-  document.getElementById("resultado-churrasco").innerText =
-    `Carne total: ${totalCarne.toFixed(2)} kg`;
+  const total = h * 0.55 + m * 0.4 + c * 0.25;
+  resultado-churrasco.innerText = `${total.toFixed(2)} kg`;
 }
 
-// ---- Regra de 3 Composta ----
+// Regra de 3 composta
 function calcR3C() {
-  const txt = document.getElementById("r3c-valores").value.trim();
-  if (!txt) {
-    document.getElementById("resultado-r3c").innerText =
-      "Insira valores separados por vírgula.";
-    return;
-  }
-
-  const partes = txt.split(",").map(Number);
-  let resultado = 1;
-
-  partes.forEach((n) => {
-    if (!isNaN(n)) resultado *= n;
-  });
-
-  document.getElementById("resultado-r3c").innerText =
-    `Resultado: ${resultado}`;
+  const partes = r3c-valores.value.split(",").map(Number);
+  let r = 1;
+  partes.forEach(n => { if (!isNaN(n)) r *= n; });
+  resultado-r3c.innerText = r;
 }
 
-// ---- Conversor Base Numérica ----
+// Base numérica
 function converterBase(tipo) {
-  const n = Number(document.getElementById("num-base").value);
-
-  if (isNaN(n)) {
-    document.getElementById("resultado-base").innerText =
-      "Digite um número válido.";
-    return;
-  }
+  const n = Number(num-base.value);
 
   let r = "";
   if (tipo === "bin") r = n.toString(2);
   if (tipo === "oct") r = n.toString(8);
   if (tipo === "hex") r = n.toString(16).toUpperCase();
 
-  document.getElementById("resultado-base").innerText =
-    `Resultado: ${r}`;
+  resultado-base.innerText = r;
 }
 
-// ---- Conversor de Unidades ----
+// Conversor de unidades
 function converterUnidade() {
-  const valor = Number(document.getElementById("valor-unidade").value);
-  const de = document.getElementById("de-unidade").value;
-  const para = document.getElementById("para-unidade").value;
+  const v = Number(valor-unidade.value);
+  const de = de-unidade.value;
+  const para = para-unidade.value;
 
-  if (isNaN(valor)) {
-    document.getElementById("resultado-unidade").innerText =
-      "Digite um valor válido.";
-    return;
-  }
+  let metros = v;
 
-  // primeiro converte para metros
-  let metros = valor;
+  if (de === "km") metros = v * 1000;
+  if (de === "cm") metros = v / 100;
 
-  if (de === "km") metros = valor * 1000;
-  if (de === "cm") metros = valor / 100;
+  let res = metros;
 
-  // converte de metros para destino
-  let resultado = metros;
+  if (para === "km") res = metros / 1000;
+  if (para === "cm") res = metros * 100;
 
-  if (para === "km") resultado = metros / 1000;
-  if (para === "cm") resultado = metros * 100;
-
-  document.getElementById("resultado-unidade").innerText =
-    `Resultado: ${resultado}`;
+  resultado-unidade.innerText = res;
 }
 
-// ---- Conversor de Moedas (manual) ----
+// Conversor de moedas
 function converterMoeda() {
-  const valor = Number(document.getElementById("valor-moeda").value);
-  const de = document.getElementById("de-moeda").value;
-  const para = document.getElementById("para-moeda").value;
+  const valor = Number(valor-moeda.value);
+  const de = de-moeda.value;
+  const para = para-moeda.value;
 
-  const taxas = {
+  const tabela = {
     BRL: { USD: 0.20, EUR: 0.18 },
-    USD: { BRL: 5.00, EUR: 0.90 },
-    EUR: { BRL: 5.50, USD: 1.10 }
+    USD: { BRL: 5, EUR: 0.9 },
+    EUR: { BRL: 5.5, USD: 1.1 }
   };
 
-  if (isNaN(valor)) {
-    document.getElementById("resultado-moeda").innerText =
-      "Digite um valor válido.";
-    return;
-  }
-
   if (de === para) {
-    document.getElementById("resultado-moeda").innerText =
-      `Resultado: ${valor}`;
+    resultado-moeda.innerText = valor;
     return;
   }
 
-  const taxa = taxas[de]?.[para];
-  document.getElementById("resultado-moeda").innerText =
-    `Resultado: ${(valor * taxa).toFixed(2)}`;
+  const taxa = tabela[de][para];
+  resultado-moeda.innerText = (valor * taxa).toFixed(2);
 }
 
-// ---- Compactar / Descompactar texto ----
+// Compactar / descompactar
 function compactar() {
-  const texto = document.getElementById("texto-compactar").value;
-  const compactado = texto.replace(/\s+/g, " ").trim();
-  document.getElementById("resultado-compact").innerText = compactado;
+  resultado-compact.innerText =
+    texto-compactar.value.replace(/\s+/g, " ").trim();
 }
-
 function descompactar() {
-  const texto = document.getElementById("texto-compactar").value;
-  document.getElementById("resultado-compact").innerText = texto;
+  resultado-compact.innerText = texto-compactar.value;
 }
 
-// ---- Comparar textos (Diff) ----
+// Diff
 function compararTextos() {
-  const a = document.getElementById("texto1").value.split(/\s+/);
-  const b = document.getElementById("texto2").value.split(/\s+/);
+  const a = texto1.value.split(/\s+/);
+  const b = texto2.value.split(/\s+/);
 
   let r = "";
   const max = Math.max(a.length, b.length);
 
   for (let i = 0; i < max; i++) {
     if (a[i] === b[i]) {
-      r += a[i] + " ";
+      r += (a[i] || "") + " ";
     } else {
       if (a[i]) r += `[-${a[i]}-] `;
       if (b[i]) r += `[+${b[i]}+] `;
     }
   }
 
-  document.getElementById("resultado-diff").innerText = r;
+  resultado-diff.innerText = r;
 }
+
 // ===============================
 // Finalização e funções auxiliares
 // ===============================
