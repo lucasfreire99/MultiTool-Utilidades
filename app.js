@@ -145,7 +145,9 @@ const ferramentasTemplates = {
       <p id="resultado-imc"></p>
     </div>
   `
-};
+
+}; // ← ESTE PONTO É CRÍTICO. NÃO COLOCAR VÍRGULA AQUI
+
 // ===============================
 // Funções principais
 // ===============================
