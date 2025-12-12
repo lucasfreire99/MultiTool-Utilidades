@@ -592,6 +592,35 @@ document.addEventListener("click", (e) => {
   if (!e.target.closest(".tool-card")) pararLeitura();
 });
 
+// Função para mostrar conteúdo
+function mostrarConteudo(titulo) {
+  document.getElementById('titulo-conteudo').textContent = titulo;
+  document.getElementById('conteudo').style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+  
+  // Prevenir scroll no body
+  document.body.style.overflow = 'hidden';
+}
+
+// Função para fechar conteúdo
+function fecharConteudo() {
+  document.getElementById('conteudo').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+  
+  // Restaurar scroll
+  document.body.style.overflow = 'auto';
+}
+
+// Fechar ao clicar no overlay
+document.getElementById('overlay').addEventListener('click', fecharConteudo);
+
+// Fechar com ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    fecharConteudo();
+  }
+});
+
 // Proteções gerais
 window.onerror = function(msg, src, line, col, err) {
   console.error("Erro JS:", msg, "em", line, col, err);
