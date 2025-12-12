@@ -1,13 +1,12 @@
 // ================================================
-// MultiTool - Lucas Freire
+// MultiTool — Arquivo app.js completo e validado
 // ================================================
-
 
 // Referências
 const menu = document.getElementById("menu");
 const conteudo = document.getElementById("conteudo");
 
-// Lista de ferramentas ATIVAS
+// Lista de ferramentas
 const ferramentas = {
   regra3simples: "Regra de 3 Simples",
   porcentagem: "Calculadora de Porcentagem",
@@ -21,9 +20,13 @@ const ferramentas = {
   signos: "Signos e Datas",
   imc: "Cálculo de IMC",
   leituraRapida: "Leitura Rápida",
+  //churrasco: "Calculadora de Churrasco",
+  //regra3composta: "Regra de 3 Composta",
   baseNumerica: "Conversor de Base",
   unidade: "Conversor de Unidades",
-  moedas: "Conversor de Moedas"
+  moedas: "Conversor de Moedas",
+  //compactador: "Compactador de Texto",
+  //diff: "Comparador de Texto (Diff)"
 };
 
 // Renderizar menu
@@ -44,9 +47,8 @@ function carregarFerramenta(id) {
 }
 
 // ===================================================
-// Templates HTML — COM APENAS AS FERRAMENTAS ATIVAS
+// Templates HTML — TODAS AS FERRAMENTAS COMPLETAS
 // ===================================================
-
 const ferramentasTemplates = {
 
   regra3simples: () => `
@@ -80,7 +82,7 @@ const ferramentasTemplates = {
   somarDias: () => `
     <div class="tool-card">
       <input id="data-base" type="date">
-      <input id="dias-somar" type="number" placeholder="Dias para somar">
+      <input id="dias-somar" type="number" placeholder="Quantidade de dias">
       <button onclick="calcSomarDias()">Somar</button>
       <p id="resultado-somar"></p>
     </div>
@@ -88,7 +90,7 @@ const ferramentasTemplates = {
 
   extenso: () => `
     <div class="tool-card">
-      <input id="numero-extenso" placeholder="Número">
+      <input id="numero-extenso" placeholder="Número para converter">
       <button onclick="converterExtenso()">Converter</button>
       <p id="resultado-extenso"></p>
     </div>
@@ -96,7 +98,7 @@ const ferramentasTemplates = {
 
   maiusminus: () => `
     <div class="tool-card">
-      <textarea id="texto-mm" rows="6" placeholder="Digite o texto..."></textarea>
+      <textarea id="texto-mm" placeholder="Digite o texto..." rows="6"></textarea>
       <button onclick="maiuscula()">MAIÚSCULAS</button>
       <button onclick="minuscula()">minúsculas</button>
       <button onclick="capitalizar()">Primeira Maiúscula</button>
@@ -106,7 +108,7 @@ const ferramentasTemplates = {
 
   roleta: () => `
     <div class="tool-card">
-      <textarea id="roleta-valores" placeholder="Ex: João, Maria, Pedro" rows="4"></textarea>
+      <textarea id="roleta-valores" placeholder="Ex: João, Pedro, Maria" rows="4"></textarea>
       <button onclick="gerarRoleta()">Girar</button>
       <p id="resultado-roleta"></p>
     </div>
@@ -115,8 +117,8 @@ const ferramentasTemplates = {
   aleatorios: () => `
     <div class="tool-card">
       <input id="qtd" type="number" placeholder="Quantidade">
-      <input id="min" type="number" placeholder="Min">
-      <input id="max" type="number" placeholder="Max">
+      <input id="min" type="number" placeholder="Mínimo">
+      <input id="max" type="number" placeholder="Máximo">
       <button onclick="gerarAleatorios()">Gerar</button>
       <pre id="resultado-aleatorios"></pre>
     </div>
@@ -149,16 +151,36 @@ const ferramentasTemplates = {
 
   leituraRapida: () => `
     <div class="tool-card">
-      <textarea id="texto-rapido" rows="6" placeholder="Texto..."></textarea>
+      <textarea id="texto-rapido" rows="6" placeholder="Digite o texto..."></textarea>
       <input id="ppm" type="number" value="400" placeholder="PPM">
+
       <button onclick="iniciarLeitura()">Iniciar</button>
+
       <div id="painel-leitura" class="painel-leitura"></div>
+    </div>
+  `,
+
+  churrasco: () => `
+    <div class="tool-card">
+      <input id="homens" type="number" placeholder="Homens">
+      <input id="mulheres" type="number" placeholder="Mulheres">
+      <input id="criancas" type="number" placeholder="Crianças">
+      <button onclick="calcChurrasco()">Calcular</button>
+      <p id="resultado-churrasco"></p>
+    </div>
+  `,
+
+  regra3composta: () => `
+    <div class="tool-card">
+      <textarea id="r3c-valores" placeholder="Ex: 2,3,4,5" rows="4"></textarea>
+      <button onclick="calcR3C()">Calcular</button>
+      <p id="resultado-r3c"></p>
     </div>
   `,
 
   baseNumerica: () => `
     <div class="tool-card">
-      <input id="num-base" type="number" placeholder="Número">
+      <input id="num-base" type="number" placeholder="Digite o número">
       <button onclick="converterBase('bin')">Binário</button>
       <button onclick="converterBase('oct')">Octal</button>
       <button onclick="converterBase('hex')">Hexadecimal</button>
@@ -206,92 +228,88 @@ const ferramentasTemplates = {
       <button onclick="converterMoeda()">Converter</button>
       <p id="resultado-moeda"></p>
     </div>
+  `,
+
+  compactador: () => `
+    <div class="tool-card">
+      <textarea id="texto-compactar" rows="6" placeholder="Digite o texto..."></textarea>
+      <button onclick="compactar()">Compactar</button>
+      <button onclick="descompactar()">Descompactar</button>
+      <pre id="resultado-compact"></pre>
+    </div>
+  `,
+
+  diff: () => `
+    <div class="tool-card">
+      <textarea id="texto1" rows="4" placeholder="Texto 1..."></textarea>
+      <textarea id="texto2" rows="4" placeholder="Texto 2..."></textarea>
+      <button onclick="compararTextos()">Comparar</button>
+      <pre id="resultado-diff"></pre>
+    </div>
   `
+
 };
 
 // =================================================================
-// FUNÇÕES
+// FUNÇÕES DE CÁLCULO
 // =================================================================
 
 // Regra de 3
 function calcRegra3() {
-  const a = Number(document.getElementById("a").value);
-  const b = Number(document.getElementById("b").value);
-  const c = Number(document.getElementById("c").value);
-
-  if (!a || !b || !c) {
-    document.getElementById("resultado-regra3").innerText = "Preencha todos os campos.";
-    return;
-  }
-
-  document.getElementById("resultado-regra3").innerText = (b * c) / a;
+  const a = Number(a.value);
+  const b = Number(b.value);
+  const c = Number(c.value);
+  resultado-regra3.innerText = (b * c) / a;
 }
 
 // Porcentagem
 function calcPorcentagem() {
   const valor = Number(document.getElementById("valor").value);
   const perc = Number(document.getElementById("perc").value);
-
-  document.getElementById("resultado-porc").innerText = (valor * perc) / 100;
+  resultado-porc.innerText = (valor * perc) / 100;
 }
 
 // Dias entre datas
 function calcDias() {
-  const d1 = new Date(document.getElementById("data1").value);
-  const d2 = new Date(document.getElementById("data2").value);
-
+  const d1 = new Date(data1.value);
+  const d2 = new Date(data2.value);
   const diff = Math.abs(d2 - d1) / (1000 * 60 * 60 * 24);
-
-  document.getElementById("resultado-dias").innerText = `${diff} dias`;
+  resultado-dias.innerText = `${diff} dias`;
 }
 
 // Somar dias
 function calcSomarDias() {
   const base = new Date(document.getElementById("data-base").value);
   const qtd = Number(document.getElementById("dias-somar").value);
-
   base.setDate(base.getDate() + qtd);
-
-  document.getElementById("resultado-somar").innerText =
-    base.toLocaleDateString("pt-BR");
+  resultado-somar.innerText = base.toLocaleDateString();
 }
 
-// Número por extenso (simples)
+// Número por extenso
 function converterExtenso() {
-  const n = Number(document.getElementById("numero-extenso").value);
-
-  document.getElementById("resultado-extenso").innerText =
-    new Intl.NumberFormat("pt-BR").format(n);
+  const n = document.getElementById("numero-extenso").value;
+  resultado-extenso.innerText = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  }).format(n);
 }
 
-// Maiúsculas / Minúsculas
+// Maiúscula / minúscula
 function maiuscula() {
-  document.getElementById("resultado-mm").innerText =
-    document.getElementById("texto-mm").value.toUpperCase();
+  resultado-mm.innerText = texto-mm.value.toUpperCase();
 }
-
 function minuscula() {
-  document.getElementById("resultado-mm").innerText =
-    document.getElementById("texto-mm").value.toLowerCase();
+  resultado-mm.innerText = texto-mm.value.toLowerCase();
 }
-
 function capitalizar() {
-  const txt = document.getElementById("texto-mm").value.toLowerCase();
-  document.getElementById("resultado-mm").innerText =
-    txt.charAt(0).toUpperCase() + txt.slice(1);
+  const t = texto-mm.value.toLowerCase();
+  resultado-mm.innerText = t.charAt(0).toUpperCase() + t.slice(1);
 }
 
 // Roleta
 function gerarRoleta() {
-  const valores = document
-    .getElementById("roleta-valores")
-    .value.split(",")
-    .map(v => v.trim())
-    .filter(Boolean);
-
-  const sorteado = valores[Math.floor(Math.random() * valores.length)];
-
-  document.getElementById("resultado-roleta").innerText = sorteado;
+  const lista = roleta-valores.value.split(",").map(v => v.trim()).filter(Boolean);
+  resultado-roleta.innerText = lista[Math.floor(Math.random() * lista.length)];
 }
 
 // Aleatórios
@@ -301,34 +319,27 @@ function gerarAleatorios() {
   const max = Number(document.getElementById("max").value);
 
   const lista = [];
-
-  for (let i = 0; i < qtd; i++) {
+  for (let i = 0; i < qtd; i++)
     lista.push(Math.floor(Math.random() * (max - min + 1)) + min);
-  }
 
-  document.getElementById("resultado-aleatorios").innerText =
-    lista.join(", ");
+  resultado-aleatorios.innerText = lista.join(", ");
 }
 
 // Idade
 function calcIdade() {
-  const nasc = new Date(document.getElementById("data-nascimento").value);
+  const nasc = new Date(data-nascimento.value);
   const hoje = new Date();
 
   let idade = hoje.getFullYear() - nasc.getFullYear();
-
   if (
     hoje.getMonth() < nasc.getMonth() ||
     (hoje.getMonth() === nasc.getMonth() && hoje.getDate() < nasc.getDate())
-  ) {
-    idade--;
-  }
+  ) idade--;
 
-  document.getElementById("resultado-idade").innerText =
-    `${idade} anos`;
+  resultado-idade.innerText = `${idade} anos`;
 }
 
-// Signos
+// Signo
 function calcSigno() {
   const data = new Date(document.getElementById("data-signo").value);
   const dia = data.getUTCDate();
@@ -349,11 +360,10 @@ function calcSigno() {
     ["Sagitário", 22, 11, 21, 12],
   ];
 
-  let signo = "Não identificado";
+  let signo = "Indefinido";
 
   for (let s of signos) {
     const [nome, ini_dia, ini_mes, fim_dia, fim_mes] = s;
-
     if (
       (mes === ini_mes && dia >= ini_dia) ||
       (mes === fim_mes && dia <= fim_dia)
@@ -363,18 +373,16 @@ function calcSigno() {
     }
   }
 
-  document.getElementById("resultado-signo").innerText = `Signo: ${signo}`;
+  resultado-signo.innerText = `Signo: ${signo}`;
 }
 
 // IMC
 function calcIMC() {
   const peso = Number(document.getElementById("peso").value);
   const altura = Number(document.getElementById("altura").value);
-
   const imc = peso / (altura * altura);
 
   let c = "";
-
   if (imc < 18.5) c = "Abaixo do peso";
   else if (imc < 25) c = "Peso ideal";
   else if (imc < 30) c = "Sobrepeso";
@@ -382,8 +390,7 @@ function calcIMC() {
   else if (imc < 40) c = "Obesidade II";
   else c = "Obesidade III";
 
-  document.getElementById("resultado-imc").innerText =
-    `${imc.toFixed(2)} → ${c}`;
+  resultado-imc.innerText = `${imc.toFixed(2)} → ${c}`;
 }
 
 // Leitura rápida
@@ -392,81 +399,116 @@ let leituraArray = [];
 let leituraTimer = null;
 
 function iniciarLeitura() {
-  leituraArray = document
-    .getElementById("texto-rapido")
-    .value.split(/\s+/);
-
+  leituraArray = texto-rapido.value.split(/\s+/);
   leituraIndex = 0;
 
   clearInterval(leituraTimer);
-
-  const ppm = Number(document.getElementById("ppm").value) || 400;
-
   leituraTimer = setInterval(() => {
     if (leituraIndex >= leituraArray.length) {
       clearInterval(leituraTimer);
       return;
     }
-
-    document.getElementById("painel-leitura").innerText =
-      leituraArray[leituraIndex++];
-
-  }, 60000 / ppm);
+    painel-leitura.innerText = leituraArray[leituraIndex++];
+  }, 60000 / (ppm.value || 400));
 }
 
-// Conversão de base
+// Churrasco
+function calcChurrasco() {
+  const h = Number(homens.value);
+  const m = Number(mulheres.value);
+  const c = Number(criancas.value);
+
+  const total = h * 0.55 + m * 0.4 + c * 0.25;
+  resultado-churrasco.innerText = `${total.toFixed(2)} kg`;
+}
+
+// Regra de 3 composta
+function calcR3C() {
+  const partes = r3c-valores.value.split(",").map(Number);
+  let r = 1;
+  partes.forEach(n => { if (!isNaN(n)) r *= n; });
+  resultado-r3c.innerText = r;
+}
+
+// Base numérica
 function converterBase(tipo) {
-  const n = Number(document.getElementById("num-base").value);
+  const n = Number(num-base.value);
 
   let r = "";
-
   if (tipo === "bin") r = n.toString(2);
   if (tipo === "oct") r = n.toString(8);
   if (tipo === "hex") r = n.toString(16).toUpperCase();
 
-  document.getElementById("resultado-base").innerText = r;
+  resultado-base.innerText = r;
 }
 
 // Conversor de unidades
 function converterUnidade() {
-  const valor = Number(document.getElementById("valor-unidade").value);
-  const de = document.getElementById("de-unidade").value;
-  const para = document.getElementById("para-unidade").value;
+  const v = Number(valor-unidade.value);
+  const de = de-unidade.value;
+  const para = para-unidade.value;
 
-  let metros = valor;
+  let metros = v;
 
-  if (de === "km") metros = valor * 1000;
-  if (de === "cm") metros = valor / 100;
+  if (de === "km") metros = v * 1000;
+  if (de === "cm") metros = v / 100;
 
-  let resultado = metros;
+  let res = metros;
 
-  if (para === "km") resultado = metros / 1000;
-  if (para === "cm") resultado = metros * 100;
+  if (para === "km") res = metros / 1000;
+  if (para === "cm") res = metros * 100;
 
-  document.getElementById("resultado-unidade").innerText = resultado;
+  resultado-unidade.innerText = res;
 }
 
 // Conversor de moedas
 function converterMoeda() {
-  const valor = Number(document.getElementById("valor-moeda").value);
-  const de = document.getElementById("de-moeda").value;
-  const para = document.getElementById("para-moeda").value;
+  const valor = Number(valor-moeda.value);
+  const de = de-moeda.value;
+  const para = para-moeda.value;
 
-  const taxas = {
+  const tabela = {
     BRL: { USD: 0.20, EUR: 0.18 },
-    USD: { BRL: 5.0, EUR: 0.90 },
+    USD: { BRL: 5, EUR: 0.9 },
     EUR: { BRL: 5.5, USD: 1.1 }
   };
 
   if (de === para) {
-    document.getElementById("resultado-moeda").innerText = valor;
+    resultado-moeda.innerText = valor;
     return;
   }
 
-  const taxa = taxas[de][para];
+  const taxa = tabela[de][para];
+  resultado-moeda.innerText = (valor * taxa).toFixed(2);
+}
 
-  document.getElementById("resultado-moeda").innerText =
-    (valor * taxa).toFixed(2);
+// Compactar / descompactar
+function compactar() {
+  resultado-compact.innerText =
+    texto-compactar.value.replace(/\s+/g, " ").trim();
+}
+function descompactar() {
+  resultado-compact.innerText = texto-compactar.value;
+}
+
+// Diff
+function compararTextos() {
+  const a = texto1.value.split(/\s+/);
+  const b = texto2.value.split(/\s+/);
+
+  let r = "";
+  const max = Math.max(a.length, b.length);
+
+  for (let i = 0; i < max; i++) {
+    if (a[i] === b[i]) {
+      r += (a[i] || "") + " ";
+    } else {
+      if (a[i]) r += `[-${a[i]}-] `;
+      if (b[i]) r += `[+${b[i]}+] `;
+    }
+  }
+
+  resultado-diff.innerText = r;
 }
 
 // ===============================
