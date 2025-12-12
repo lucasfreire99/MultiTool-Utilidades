@@ -94,7 +94,7 @@ header h1 {
 }
 
 /* ===== INPUTS ===== */
-input, select, textarea {
+input, select, textarea, button {
   background: var(--bg-alt);
   color: var(--text);
   width: 100%;
@@ -104,7 +104,12 @@ input, select, textarea {
   margin-bottom: 12px;
 }
 
-input:focus, textarea:focus {
+button {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--primary);
 }
@@ -154,6 +159,25 @@ input:focus, textarea:focus {
 
 #installBtn:hover {
   background: var(--primary-hover);
+}
+
+/* ===== BOTÕES DO MENU – (CORREÇÃO IMPORTANTE) ===== */
+.btn-menu {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid #333;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+  text-align: left;
+  transition: 0.25s;
+}
+
+.btn-menu:hover {
+  background: var(--primary);
+  border-color: var(--primary-hover);
 }
 
 /* ===== MOBILE ===== */
