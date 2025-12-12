@@ -1,5 +1,5 @@
 // ================================================
-// MultiTool — Arquivo app.js completo e validado
+// MultiTool - Lucas Freire
 // ================================================
 
 // Referências
@@ -20,13 +20,9 @@ const ferramentas = {
   signos: "Signos e Datas",
   imc: "Cálculo de IMC",
   leituraRapida: "Leitura Rápida",
-  churrasco: "Calculadora de Churrasco",
-  regra3composta: "Regra de 3 Composta",
   baseNumerica: "Conversor de Base",
   unidade: "Conversor de Unidades",
   moedas: "Conversor de Moedas",
-  compactador: "Compactador de Texto",
-  diff: "Comparador de Texto (Diff)"
 };
 
 // Renderizar menu
@@ -160,24 +156,6 @@ const ferramentasTemplates = {
     </div>
   `,
 
-  churrasco: () => `
-    <div class="tool-card">
-      <input id="homens" type="number" placeholder="Homens">
-      <input id="mulheres" type="number" placeholder="Mulheres">
-      <input id="criancas" type="number" placeholder="Crianças">
-      <button onclick="calcChurrasco()">Calcular</button>
-      <p id="resultado-churrasco"></p>
-    </div>
-  `,
-
-  regra3composta: () => `
-    <div class="tool-card">
-      <textarea id="r3c-valores" placeholder="Ex: 2,3,4,5" rows="4"></textarea>
-      <button onclick="calcR3C()">Calcular</button>
-      <p id="resultado-r3c"></p>
-    </div>
-  `,
-
   baseNumerica: () => `
     <div class="tool-card">
       <input id="num-base" type="number" placeholder="Digite o número">
@@ -227,24 +205,6 @@ const ferramentasTemplates = {
 
       <button onclick="converterMoeda()">Converter</button>
       <p id="resultado-moeda"></p>
-    </div>
-  `,
-
-  compactador: () => `
-    <div class="tool-card">
-      <textarea id="texto-compactar" rows="6" placeholder="Digite o texto..."></textarea>
-      <button onclick="compactar()">Compactar</button>
-      <button onclick="descompactar()">Descompactar</button>
-      <pre id="resultado-compact"></pre>
-    </div>
-  `,
-
-  diff: () => `
-    <div class="tool-card">
-      <textarea id="texto1" rows="4" placeholder="Texto 1..."></textarea>
-      <textarea id="texto2" rows="4" placeholder="Texto 2..."></textarea>
-      <button onclick="compararTextos()">Comparar</button>
-      <pre id="resultado-diff"></pre>
     </div>
   `
 
@@ -412,24 +372,6 @@ function iniciarLeitura() {
   }, 60000 / (ppm.value || 400));
 }
 
-// Churrasco
-function calcChurrasco() {
-  const h = Number(homens.value);
-  const m = Number(mulheres.value);
-  const c = Number(criancas.value);
-
-  const total = h * 0.55 + m * 0.4 + c * 0.25;
-  resultado-churrasco.innerText = `${total.toFixed(2)} kg`;
-}
-
-// Regra de 3 composta
-function calcR3C() {
-  const partes = r3c-valores.value.split(",").map(Number);
-  let r = 1;
-  partes.forEach(n => { if (!isNaN(n)) r *= n; });
-  resultado-r3c.innerText = r;
-}
-
 // Base numérica
 function converterBase(tipo) {
   const n = Number(num-base.value);
@@ -480,35 +422,6 @@ function converterMoeda() {
 
   const taxa = tabela[de][para];
   resultado-moeda.innerText = (valor * taxa).toFixed(2);
-}
-
-// Compactar / descompactar
-function compactar() {
-  resultado-compact.innerText =
-    texto-compactar.value.replace(/\s+/g, " ").trim();
-}
-function descompactar() {
-  resultado-compact.innerText = texto-compactar.value;
-}
-
-// Diff
-function compararTextos() {
-  const a = texto1.value.split(/\s+/);
-  const b = texto2.value.split(/\s+/);
-
-  let r = "";
-  const max = Math.max(a.length, b.length);
-
-  for (let i = 0; i < max; i++) {
-    if (a[i] === b[i]) {
-      r += (a[i] || "") + " ";
-    } else {
-      if (a[i]) r += `[-${a[i]}-] `;
-      if (b[i]) r += `[+${b[i]}+] `;
-    }
-  }
-
-  resultado-diff.innerText = r;
 }
 
 // ===============================
