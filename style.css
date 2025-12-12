@@ -205,6 +205,178 @@ input:focus, textarea:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
 
+/* ===== CONTEÚDO CENTRALIZADO (ESTILO MODAL) ===== */
+#conteudo {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  width: 90%;
+  max-width: 600px;
+  background: var(--card);
+  border: 1px solid #333;
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: modalFadeIn 0.3s ease-out;
+  pointer-events: auto;
+}
+
+/* Animação de entrada */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Animação de saída */
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+/* Cabeçalho do conteúdo */
+#conteudo h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--text);
+  border-bottom: 1px solid #333;
+  padding-bottom: 12px;
+}
+
+/* Ajuste do card dentro do conteúdo */
+#conteudo .tool-card {
+  background: var(--bg-alt);
+  border: 1px solid #222;
+  padding: 20px;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+}
+
+#conteudo .tool-card:hover {
+  transform: none;
+  border-color: #222;
+}
+
+/* Inputs e botões dentro do modal */
+#conteudo input,
+#conteudo select,
+#conteudo textarea {
+  background: var(--bg);
+  border: 1px solid #333;
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+#conteudo button {
+  background: linear-gradient(135deg, var(--primary), #3a7bc8);
+  padding: 14px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  margin-top: 8px;
+}
+
+#conteudo button:hover {
+  background: linear-gradient(135deg, var(--primary-hover), #4a90e2);
+}
+
+/* Área de resultado */
+#conteudo .result-box {
+  background: var(--bg);
+  border: 1px solid #222;
+  margin-top: 20px;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+/* Overlay de fundo (opcional) */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 40;
+  animation: overlayFadeIn 0.3s ease-out;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Botão de fechar (opcional) */
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  #conteudo {
+    width: 95%;
+    padding: 20px;
+    max-width: 90%;
+  }
+  
+  #conteudo h2 {
+    font-size: 1.3rem;
+  }
+  
+  #conteudo .tool-card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  #conteudo {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    padding: 16px;
+  }
+  
+  #conteudo h2 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+}
+
 /* ===== ÁREA DE RESULTADO ===== */
 .result-box {
   background: #0f0f0f;
@@ -240,27 +412,86 @@ input:focus, textarea:focus, select:focus {
   transform: translateY(-1px);
 }
 
-/* ===== PWA INSTALL BUTTON ===== */
+/* ===== PWA INSTALL BUTTON (MENOR) ===== */
 #installBtn {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 20px;
+  right: 20px;
   background: linear-gradient(135deg, var(--primary), #3a7bc8);
   border-radius: 50px;
-  padding: 14px 22px;
+  padding: 10px 16px; /* Reduzido de 14px 22px */
   font-weight: 600;
   color: white;
   border: none;
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Sombra mais sutil */
   cursor: pointer;
   display: none;
   z-index: 1000;
   transition: all 0.3s ease;
+  font-size: 0.9rem; /* Mantém o tamanho do texto */
 }
 
 #installBtn:hover {
   background: linear-gradient(135deg, var(--primary-hover), #4a90e2);
   transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.25);
+}
+
+/* Versão ainda mais compacta para mobile */
+@media (max-width: 600px) {
+  #installBtn {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 14px; /* Ainda menor no mobile */
+    font-size: 0.85rem; /* Texto ligeiramente menor no mobile */
+  }
+}
+
+/* Opção: Botão circular ícone + texto reduzido */
+#installBtn.compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px 8px 8px; /* Mais compacto */
+}
+
+#installBtn.compact::before {
+  content: "⬇️"; /* Ícone de download */
+  font-size: 0.9rem;
+}
+
+/* Se quiser apenas ícone (sem texto) */
+#installBtn.icon-only {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+#installBtn.icon-only::before {
+  content: "⬇";
+}
+
+/* ===== PWA INSTALL BUTTON (MINIMALISTA) ===== */
+#installBtn.minimal {
+  background: var(--primary);
+  border-radius: 40px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#installBtn.minimal:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
 }
 
 /* ===== BOTÕES DO MENU ===== */
