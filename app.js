@@ -204,7 +204,7 @@ const ferramentasTemplates = {
       </select>
 
       <button onclick="converterMoeda()">Converter</button>
-      <p id="resultado-moeda"></p>
+      <pre id="resultado-moeda"></pre>
     </div>
   `
 
