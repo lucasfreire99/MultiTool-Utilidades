@@ -671,13 +671,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ---- Reset de leitura rápida ao trocar ferramenta ----
 function resetLeituraRapida() {
-  clearInterval(leituraTimer);
-  leituraTimer = null;
-  leituraArray = [];
-  leituraIndex = 0;
+  // usa o sistema NOVO de leitura rápida
+  if (typeof stopReader === "function") {
+    stopReader();
+  }
 }
 
 document.addEventListener("click", (e) => {
+  // se clicou fora da ferramenta, para a leitura
   if (!e.target.closest(".tool-card")) {
     resetLeituraRapida();
   }
@@ -689,5 +690,7 @@ window.onerror = function (msg, src, line, col, error) {
 };
 
 // ---- Mensagem útil no console ----
-console.log("%cMultiTool carregado com sucesso!", 
-  "background:#333; color:#4a90e2; padding:6px; border-radius:6px;");
+console.log(
+  "%cMultiTool carregado com sucesso!",
+  "background:#333; color:#4a90e2; padding:6px; border-radius:6px;"
+);
