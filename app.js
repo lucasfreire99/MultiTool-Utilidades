@@ -20,13 +20,13 @@ const ferramentas = {
   signos: "Signos e Datas",
   imc: "Cálculo de IMC",
   leituraRapida: "Leitura Rápida",
-  //churrasco: "Calculadora de Churrasco",
-  //regra3composta: "Regra de 3 Composta",
+  churrasco: "Calculadora de Churrasco",
+  regra3composta: "Regra de 3 Composta",
   baseNumerica: "Conversor de Base",
   unidade: "Conversor de Unidades",
   moedas: "Conversor de Moedas",
-  //compactador: "Compactador de Texto",
-  //diff: "Comparador de Texto (Diff)"
+  compactador: "Compactador de Texto",
+  diff: "Comparador de Texto (Diff)"
 };
 
 // Renderizar menu
