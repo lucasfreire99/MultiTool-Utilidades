@@ -136,7 +136,115 @@ const ferramentasTemplates = {
       <p id="resultado-signo"></p>
     </div>
   `,
+  
+leituraRapida: () => `
+  <div class="tool-card">
+    <textarea id="texto-rapido" placeholder="Digite o texto para leitura..." rows="6"></textarea>
 
+    <input id="ppm" type="number" placeholder="PPM (padrão 400)" value="400">
+
+    <button onclick="iniciarLeitura()">Iniciar</button>
+
+    <div id="painel-leitura" class="painel-leitura"></div>
+  </div>
+`,
+
+  churrasco: () => `
+  <div class="tool-card">
+    <input id="homens" type="number" placeholder="Homens">
+    <input id="mulheres" type="number" placeholder="Mulheres">
+    <input id="criancas" type="number" placeholder="Crianças">
+
+    <button onclick="calcChurrasco()">Calcular</button>
+    <p id="resultado-churrasco"></p>
+  </div>
+`,
+
+regra3composta: () => `
+  <div class="tool-card">
+    <textarea id="r3c-valores" placeholder="Ex: 2,3,4,5"></textarea>
+    <button onclick="calcR3C()">Calcular</button>
+    <p id="resultado-r3c"></p>
+  </div>
+`,
+
+  baseNumerica: () => `
+  <div class="tool-card">
+    <input id="num-base" type="number" placeholder="Digite o número">
+
+    <button onclick="converterBase('bin')">Binário</button>
+    <button onclick="converterBase('oct')">Octal</button>
+    <button onclick="converterBase('hex')">Hexadecimal</button>
+
+    <p id="resultado-base"></p>
+  </div>
+`,
+
+unidade: () => `
+  <div class="tool-card">
+    <input id="valor-unidade" type="number" placeholder="Valor">
+
+    <select id="de-unidade">
+      <option value="m">Metro</option>
+      <option value="km">Quilômetro</option>
+      <option value="cm">Centímetro</option>
+    </select>
+
+    <select id="para-unidade">
+      <option value="m">Metro</option>
+      <option value="km">Quilômetro</option>
+      <option value="cm">Centímetro</option>
+    </select>
+
+    <button onclick="converterUnidade()">Converter</button>
+
+    <p id="resultado-unidade"></p>
+  </div>
+`,
+
+moedas: () => `
+  <div class="tool-card">
+    <input id="valor-moeda" type="number" placeholder="Valor">
+
+    <select id="de-moeda">
+      <option value="BRL">BRL</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+    </select>
+
+    <select id="para-moeda">
+      <option value="BRL">BRL</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+    </select>
+
+    <button onclick="converterMoeda()">Converter</button>
+    <p id="resultado-moeda"></p>
+  </div>
+`,
+
+  compactador: () => `
+  <div class="tool-card">
+    <textarea id="texto-compactar" placeholder="Digite ou cole o texto aqui..." rows="6"></textarea>
+
+    <button onclick="compactar()">Compactar</button>
+    <button onclick="descompactar()">Descompactar</button>
+
+    <pre id="resultado-compact"></pre>
+  </div>
+`,
+
+  diff: () => `
+  <div class="tool-card">
+    <textarea id="texto1" placeholder="Texto 1..." rows="4"></textarea>
+    <textarea id="texto2" placeholder="Texto 2..." rows="4"></textarea>
+
+    <button onclick="compararTextos()">Comparar</button>
+
+    <pre id="resultado-diff"></pre>
+  </div>
+`,
+  
   imc: () => `
     <div class="tool-card">
       <input id="peso" type="number" placeholder="Peso (kg)">
