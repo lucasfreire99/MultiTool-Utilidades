@@ -21,7 +21,26 @@
 
   <nav id="menu" class="tools-grid"></nav>
 
-  <main id="conteudo"></main>
+  <!-- Overlay de fundo -->
+<div class="overlay" id="overlay" style="display: none;"></div>
+
+<!-- Conteúdo principal com botão de fechar -->
+<main id="conteudo" style="display: none;">
+  <button class="close-btn" onclick="fecharConteudo()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 6 6 18"></path>
+      <path d="m6 6 12 12"></path>
+    </svg>
+  </button>
+  
+  <h2 id="titulo-conteudo">"função escolhida pelo usuario"</h2>
+  
+  <div class="tool-card">
+    <input id="num-base" type="number" placeholder="Número decimal">
+    <button onclick="converterBase()">Converter</button>
+    <div class="result-box" id="resultado-base"></div>
+  </div>
+</main>
 
   <!-- Botão de instalar PWA -->
   <button id="installBtn">Instalar App</button>
