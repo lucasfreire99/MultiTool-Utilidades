@@ -1,5 +1,5 @@
 // ================================================
-// MultiTool — app.js (sincronizado com IDs antigos)
+// MultiTool — app.js
 // ================================================
 
 // Referências principais
@@ -37,15 +37,36 @@ function gerarMenu() {
 }
 gerarMenu();
 
-// Carrega ferramenta no main
+// Carrega ferramenta no modal
 function carregarFerramenta(id) {
   const tpl = ferramentasTemplates[id];
   if (!tpl) {
     conteudo.innerHTML = `<p>Ferramenta não encontrada.</p>`;
     return;
   }
-  conteudo.innerHTML = `<h2>${ferramentas[id]}</h2>` + tpl();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  
+  // Atualizar título
+  document.getElementById('titulo-conteudo').textContent = ferramentas[id];
+  
+  // Atualizar conteúdo
+  const contentDiv = conteudo.querySelector('.tool-card');
+  if (contentDiv) {
+    contentDiv.innerHTML = tpl().split('</h2>')[1]; // Remove o h2 duplicado
+  } else {
+    conteudo.querySelector('h2').insertAdjacentHTML('afterend', tpl());
+  }
+  
+  // Mostrar o modal
+  mostrarConteudo();
+}
+
+// E alterar a função mostrarConteudo:
+function mostrarConteudo() {
+  conteudo.style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+  
+  // Prevenir scroll no body
+  document.body.style.overflow = 'hidden';
 }
 
 // Templates (IDs antigos usados aqui)
