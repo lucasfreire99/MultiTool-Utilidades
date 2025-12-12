@@ -1,6 +1,6 @@
 /* ==========================
    Multitool - STYLE.CSS
-   Estrutura completa para o site + PWA
+   Estilo centralizado tipo App
    ========================== */
 
 :root {
@@ -11,181 +11,375 @@
   --text-muted: #c9c9c9;
   --primary: #4a90e2;
   --primary-hover: #6ab0ff;
-  --radius: 12px;
-  --shadow: 0 4px 18px rgba(0,0,0,0.35);
+  --radius: 16px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.4);
+  --app-max-width: 500px;
+  --header-height: 60px;
+  --section-spacing: 24px;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
-  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
 }
 
-h1, h2 {
-  font-weight: 700;
+/* ===== CONTAINER PRINCIPAL (Centralizado como App) ===== */
+.app-container {
+  width: 100%;
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  padding: 0 16px 80px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER (App-like) ===== */
 header {
+  width: 100%;
+  max-width: var(--app-max-width);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13, 13, 13, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 16px 20px;
+  border-bottom: 1px solid #222;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 header h1 {
-  font-size: 2.4rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-/* ===== GRID PRINCIPAL ===== */
+header h1::before {
+  content: "⚙️";
+  font-size: 1.4rem;
+}
+
+/* ===== SEÇÃO PRINCIPAL ===== */
+main {
+  flex: 1;
+  width: 100%;
+  padding: 0 4px;
+}
+
+/* ===== GRID PRINCIPAL (Centralizado) ===== */
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  justify-items: center;
 }
 
-/* ===== CARD ===== */
+/* ===== CARD (App Card Design) ===== */
 .tool-card {
   background: var(--card);
   padding: 20px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  transition: 0.25s;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   border: 1px solid #222;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .tool-card:hover {
   transform: translateY(-4px);
   border-color: var(--primary);
+  box-shadow: 0 8px 25px rgba(74, 144, 226, 0.15);
 }
 
 .tool-card h2 {
   font-size: 1.2rem;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .tool-card p {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 15px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
 }
 
-/* ===== BOTÃO ===== */
+/* ===== BOTÃO (App Button) ===== */
 .tool-btn {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), #3a7bc8);
   color: white;
   text-align: center;
-  padding: 12px;
+  padding: 14px;
   border-radius: var(--radius);
   text-decoration: none;
   font-weight: 600;
-  transition: 0.25s;
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
 }
 
-.tool-btn:hover {
-  background: var(--primary-hover);
+.tool-btn:hover, .tool-btn:active {
+  background: linear-gradient(135deg, var(--primary-hover), #4a90e2);
+  transform: translateY(-1px);
 }
 
-/* ===== INPUTS ===== */
+/* ===== INPUTS (App Inputs) ===== */
+.input-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 input, select, textarea, button {
   background: var(--bg-alt);
   color: var(--text);
   width: 100%;
-  padding: 10px;
+  padding: 14px;
   border-radius: var(--radius);
   border: 1px solid #333;
-  margin-bottom: 12px;
+  font-size: 1rem;
+  transition: all 0.25s ease;
 }
 
 button {
+  background: linear-gradient(135deg, var(--primary), #3a7bc8);
+  color: white;
+  font-weight: 600;
+  border: none;
   cursor: pointer;
-  font-weight: bold;
+  margin-top: 8px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, var(--primary-hover), #4a90e2);
+  transform: translateY(-1px);
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
 }
 
 /* ===== ÁREA DE RESULTADO ===== */
 .result-box {
   background: #0f0f0f;
   border: 1px solid #222;
-  padding: 15px;
+  padding: 18px;
   border-radius: var(--radius);
-  margin-top: 15px;
+  margin-top: 20px;
   white-space: pre-wrap;
+  word-break: break-word;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 /* ===== BOTÃO DE DOWNLOAD ===== */
 .download-btn {
-  margin-top: 10px;
-  background: #28a745;
-  padding: 10px;
+  margin-top: 16px;
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  padding: 14px;
   border-radius: var(--radius);
   display: block;
   color: #fff;
   text-align: center;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  transition: all 0.25s ease;
 }
 
 .download-btn:hover {
-  background: #3bd15d;
+  background: linear-gradient(135deg, #3bd15d, #28a745);
+  transform: translateY(-1px);
 }
 
 /* ===== PWA INSTALL BUTTON ===== */
 #installBtn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--primary);
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(135deg, var(--primary), #3a7bc8);
   border-radius: 50px;
-  padding: 14px 20px;
+  padding: 14px 22px;
   font-weight: 600;
   color: white;
   border: none;
   box-shadow: var(--shadow);
   cursor: pointer;
   display: none;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
 #installBtn:hover {
-  background: var(--primary-hover);
+  background: linear-gradient(135deg, var(--primary-hover), #4a90e2);
+  transform: scale(1.05);
 }
 
-/* ===== BOTÕES DO MENU – (CORREÇÃO IMPORTANTE) ===== */
+/* ===== BOTÕES DO MENU ===== */
 .btn-menu {
   background: var(--card);
   color: var(--text);
   border: 1px solid #333;
-  padding: 12px 16px;
+  padding: 14px 18px;
   border-radius: var(--radius);
   cursor: pointer;
   font-size: 1rem;
   width: 100%;
   text-align: left;
-  transition: 0.25s;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .btn-menu:hover {
   background: var(--primary);
   border-color: var(--primary-hover);
+  transform: translateX(4px);
 }
 
-/* ===== MOBILE ===== */
+/* ===== FOOTER (App Footer) ===== */
+.app-footer {
+  width: 100%;
+  max-width: var(--app-max-width);
+  text-align: center;
+  padding: 20px 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid #222;
+  margin-top: auto;
+}
+
+/* ===== MOBILE (Responsividade) ===== */
 @media (max-width: 600px) {
-  header h1 {
-    font-size: 1.8rem;
+  :root {
+    --radius: 14px;
   }
+  
+  .app-container {
+    padding: 0 12px 70px;
+  }
+  
+  header {
+    padding: 14px 16px;
+  }
+  
+  header h1 {
+    font-size: 1.4rem;
+  }
+  
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
   .tool-card {
+    padding: 18px;
+    max-width: 100%;
+  }
+  
+  .tool-btn, button, .download-btn {
     padding: 16px;
   }
+  
+  #installBtn {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tool-card {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* ===== SCROLLBAR PERSONALIZADA ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
+}
+
+/* ===== LOADING SPINNER (Opcional) ===== */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
