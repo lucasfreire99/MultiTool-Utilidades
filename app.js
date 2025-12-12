@@ -48,6 +48,9 @@ function carregarFerramenta(id) {
 
 const ferramentasTemplates = {
 
+  // -------------------------
+  // 1 — Regra de 3 Simples
+  // -------------------------
   regra3simples: () => `
     <div class="tool-card">
       <input id="a" type="number" placeholder="A">
@@ -58,6 +61,9 @@ const ferramentasTemplates = {
     </div>
   `,
 
+  // -------------------------
+  // 2 — Porcentagem
+  // -------------------------
   porcentagem: () => `
     <div class="tool-card">
       <input id="valor" type="number" placeholder="Valor">
@@ -67,6 +73,9 @@ const ferramentasTemplates = {
     </div>
   `,
 
+  // -------------------------
+  // 3 — Dias Entre Datas
+  // -------------------------
   diasEntreDatas: () => `
     <div class="tool-card">
       <input id="data1" type="date">
@@ -76,6 +85,9 @@ const ferramentasTemplates = {
     </div>
   `,
 
+  // -------------------------
+  // 4 — Somar Dias na Data
+  // -------------------------
   somarDias: () => `
     <div class="tool-card">
       <input id="data-base" type="date">
@@ -85,6 +97,9 @@ const ferramentasTemplates = {
     </div>
   `,
 
+  // -------------------------
+  // 5 — Número por Extenso
+  // -------------------------
   extenso: () => `
     <div class="tool-card">
       <input id="numero-extenso" placeholder="Número para converter">
@@ -93,9 +108,12 @@ const ferramentasTemplates = {
     </div>
   `,
 
+  // -------------------------
+  // 6 — Maiúscula / Minúscula
+  // -------------------------
   maiusminus: () => `
     <div class="tool-card">
-      <textarea id="texto-mm" placeholder="Digite o texto..."></textarea>
+      <textarea id="texto-mm" placeholder="Digite o texto..." rows="6"></textarea>
       <button onclick="maiuscula()">MAIÚSCULAS</button>
       <button onclick="minuscula()">minúsculas</button>
       <button onclick="capitalizar()">Primeira Maiúscula</button>
@@ -103,14 +121,20 @@ const ferramentasTemplates = {
     </div>
   `,
 
+  // -------------------------
+  // 7 — Roleta Online
+  // -------------------------
   roleta: () => `
     <div class="tool-card">
-      <textarea id="roleta-valores" placeholder="Ex: João, Pedro, Maria"></textarea>
+      <textarea id="roleta-valores" placeholder="Ex: João, Pedro, Maria" rows="4"></textarea>
       <button onclick="gerarRoleta()">Girar</button>
       <p id="resultado-roleta"></p>
     </div>
   `,
 
+  // -------------------------
+  // 8 — Números Aleatórios
+  // -------------------------
   aleatorios: () => `
     <div class="tool-card">
       <input id="qtd" type="number" placeholder="Quantidade">
@@ -121,6 +145,9 @@ const ferramentasTemplates = {
     </div>
   `,
 
+  // -------------------------
+  // 9 — Cálculo de Idade
+  // -------------------------
   idade: () => `
     <div class="tool-card">
       <input id="data-nascimento" type="date">
@@ -129,6 +156,9 @@ const ferramentasTemplates = {
     </div>
   `,
 
+  // -------------------------
+  // 10 — Signos
+  // -------------------------
   signos: () => `
     <div class="tool-card">
       <input id="data-signo" type="date">
@@ -136,115 +166,10 @@ const ferramentasTemplates = {
       <p id="resultado-signo"></p>
     </div>
   `,
-  
-leituraRapida: () => `
-  <div class="tool-card">
-    <textarea id="texto-rapido" placeholder="Digite o texto para leitura..." rows="6"></textarea>
 
-    <input id="ppm" type="number" placeholder="PPM (padrão 400)" value="400">
-
-    <button onclick="iniciarLeitura()">Iniciar</button>
-
-    <div id="painel-leitura" class="painel-leitura"></div>
-  </div>
-`,
-
-  churrasco: () => `
-  <div class="tool-card">
-    <input id="homens" type="number" placeholder="Homens">
-    <input id="mulheres" type="number" placeholder="Mulheres">
-    <input id="criancas" type="number" placeholder="Crianças">
-
-    <button onclick="calcChurrasco()">Calcular</button>
-    <p id="resultado-churrasco"></p>
-  </div>
-`,
-
-regra3composta: () => `
-  <div class="tool-card">
-    <textarea id="r3c-valores" placeholder="Ex: 2,3,4,5"></textarea>
-    <button onclick="calcR3C()">Calcular</button>
-    <p id="resultado-r3c"></p>
-  </div>
-`,
-
-  baseNumerica: () => `
-  <div class="tool-card">
-    <input id="num-base" type="number" placeholder="Digite o número">
-
-    <button onclick="converterBase('bin')">Binário</button>
-    <button onclick="converterBase('oct')">Octal</button>
-    <button onclick="converterBase('hex')">Hexadecimal</button>
-
-    <p id="resultado-base"></p>
-  </div>
-`,
-
-unidade: () => `
-  <div class="tool-card">
-    <input id="valor-unidade" type="number" placeholder="Valor">
-
-    <select id="de-unidade">
-      <option value="m">Metro</option>
-      <option value="km">Quilômetro</option>
-      <option value="cm">Centímetro</option>
-    </select>
-
-    <select id="para-unidade">
-      <option value="m">Metro</option>
-      <option value="km">Quilômetro</option>
-      <option value="cm">Centímetro</option>
-    </select>
-
-    <button onclick="converterUnidade()">Converter</button>
-
-    <p id="resultado-unidade"></p>
-  </div>
-`,
-
-moedas: () => `
-  <div class="tool-card">
-    <input id="valor-moeda" type="number" placeholder="Valor">
-
-    <select id="de-moeda">
-      <option value="BRL">BRL</option>
-      <option value="USD">USD</option>
-      <option value="EUR">EUR</option>
-    </select>
-
-    <select id="para-moeda">
-      <option value="BRL">BRL</option>
-      <option value="USD">USD</option>
-      <option value="EUR">EUR</option>
-    </select>
-
-    <button onclick="converterMoeda()">Converter</button>
-    <p id="resultado-moeda"></p>
-  </div>
-`,
-
-  compactador: () => `
-  <div class="tool-card">
-    <textarea id="texto-compactar" placeholder="Digite ou cole o texto aqui..." rows="6"></textarea>
-
-    <button onclick="compactar()">Compactar</button>
-    <button onclick="descompactar()">Descompactar</button>
-
-    <pre id="resultado-compact"></pre>
-  </div>
-`,
-
-  diff: () => `
-  <div class="tool-card">
-    <textarea id="texto1" placeholder="Texto 1..." rows="4"></textarea>
-    <textarea id="texto2" placeholder="Texto 2..." rows="4"></textarea>
-
-    <button onclick="compararTextos()">Comparar</button>
-
-    <pre id="resultado-diff"></pre>
-  </div>
-`,
-  
+  // -------------------------
+  // 11 — IMC
+  // -------------------------
   imc: () => `
     <div class="tool-card">
       <input id="peso" type="number" placeholder="Peso (kg)">
@@ -252,9 +177,139 @@ moedas: () => `
       <button onclick="calcIMC()">Calcular</button>
       <p id="resultado-imc"></p>
     </div>
+  `,
+
+  // -------------------------
+  // 12 — Leitura Rápida
+  // -------------------------
+  leituraRapida: () => `
+    <div class="tool-card">
+      <textarea id="texto-rapido" placeholder="Digite o texto..." rows="6"></textarea>
+      <input id="ppm" type="number" placeholder="PPM (padrão 400)" value="400">
+      <button onclick="iniciarLeitura()">Iniciar</button>
+
+      <div id="painel-leitura" class="painel-leitura"></div>
+    </div>
+  `,
+
+  // -------------------------
+  // 13 — Churrasco
+  // -------------------------
+  churrasco: () => `
+    <div class="tool-card">
+      <input id="homens" type="number" placeholder="Homens">
+      <input id="mulheres" type="number" placeholder="Mulheres">
+      <input id="criancas" type="number" placeholder="Crianças">
+
+      <button onclick="calcChurrasco()">Calcular</button>
+      <p id="resultado-churrasco"></p>
+    </div>
+  `,
+
+  // -------------------------
+  // 14 — Regra de 3 Composta
+  // -------------------------
+  regra3composta: () => `
+    <div class="tool-card">
+      <textarea id="r3c-valores" rows="4" placeholder="Ex: 2,3,4,5"></textarea>
+      <button onclick="calcR3C()">Calcular</button>
+      <p id="resultado-r3c"></p>
+    </div>
+  `,
+
+  // -------------------------
+  // 15 — Conversor de Bases
+  // -------------------------
+  baseNumerica: () => `
+    <div class="tool-card">
+      <input id="num-base" type="number" placeholder="Digite o número">
+
+      <button onclick="converterBase('bin')">Binário</button>
+      <button onclick="converterBase('oct')">Octal</button>
+      <button onclick="converterBase('hex')">Hexadecimal</button>
+
+      <p id="resultado-base"></p>
+    </div>
+  `,
+
+  // -------------------------
+  // 16 — Conversor de Unidades
+  // -------------------------
+  unidade: () => `
+    <div class="tool-card">
+      <input id="valor-unidade" type="number" placeholder="Valor">
+
+      <select id="de-unidade">
+        <option value="m">Metro</option>
+        <option value="km">Quilômetro</option>
+        <option value="cm">Centímetro</option>
+      </select>
+
+      <select id="para-unidade">
+        <option value="m">Metro</option>
+        <option value="km">Quilômetro</option>
+        <option value="cm">Centímetro</option>
+      </select>
+
+      <button onclick="converterUnidade()">Converter</button>
+
+      <p id="resultado-unidade"></p>
+    </div>
+  `,
+
+  // -------------------------
+  // 17 — Conversor de Moedas
+  // -------------------------
+  moedas: () => `
+    <div class="tool-card">
+      <input id="valor-moeda" type="number" placeholder="Valor">
+
+      <select id="de-moeda">
+        <option value="BRL">BRL</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+      </select>
+
+      <select id="para-moeda">
+        <option value="BRL">BRL</option>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+      </select>
+
+      <button onclick="converterMoeda()">Converter</button>
+      <p id="resultado-moeda"></p>
+    </div>
+  `,
+
+  // -------------------------
+  // 18 — Compactador de Texto
+  // -------------------------
+  compactador: () => `
+    <div class="tool-card">
+      <textarea id="texto-compactar" placeholder="Digite o texto..." rows="6"></textarea>
+
+      <button onclick="compactar()">Compactar</button>
+      <button onclick="descompactar()">Descompactar</button>
+
+      <pre id="resultado-compact"></pre>
+    </div>
+  `,
+
+  // -------------------------
+  // 19 — Comparador de Texto (Diff)
+  // -------------------------
+  diff: () => `
+    <div class="tool-card">
+      <textarea id="texto1" placeholder="Texto 1" rows="4"></textarea>
+      <textarea id="texto2" placeholder="Texto 2" rows="4"></textarea>
+
+      <button onclick="compararTextos()">Comparar</button>
+
+      <pre id="resultado-diff"></pre>
+    </div>
   `
 
-}; // ← ESTE PONTO É CRÍTICO. NÃO COLOCAR VÍRGULA AQUI
+};
 
 // ===============================
 // Funções principais
