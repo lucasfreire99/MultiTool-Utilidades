@@ -86,7 +86,7 @@ header h1::before {
 }
 
 /* ===== SEÇÃO PRINCIPAL ===== */
-main {
+/*main {
   flex: 1;
   width: 100%;
   padding: 0 4px;
@@ -297,14 +297,6 @@ input:focus, textarea:focus, select:focus {
   background: linear-gradient(135deg, var(--primary-hover), #4a90e2);
 }
 
-/* Área de resultado */
-#conteudo .result-box {
-  background: var(--bg);
-  border: 1px solid #222;
-  margin-top: 20px;
-  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-  font-size: 0.9rem;
-}
 
 /* Overlay de fundo (opcional) */
 .overlay {
@@ -342,6 +334,31 @@ input:focus, textarea:focus, select:focus {
 .close-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   color: var(--text);
+}
+
+/* Estilo específico para botões dentro do modal */
+#conteudo button:not(.close-btn) {
+  margin-top: 12px;
+  background: linear-gradient(135deg, var(--primary), #3a7bc8);
+  padding: 14px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: white;
+  width: 100%;
+}
+
+#conteudo button:not(.close-btn):hover {
+  background: linear-gradient(135deg, var(--primary-hover), #4a90e2);
+  transform: translateY(-2px);
+}
+
+/* Ajuste para múltiplos botões lado a lado */
+#conteudo .tool-card button + button {
+  margin-top: 8px;
 }
 
 /* Responsividade */
